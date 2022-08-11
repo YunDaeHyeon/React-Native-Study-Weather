@@ -1,23 +1,61 @@
+import { StatusBar } from 'expo-status-bar';
 import reactDom from 'react-dom';
 import { StyleSheet, Text, View } from 'react-native';
 
-// flex container의 기본 방향은 세로이며 원한다면 flexDirection: "row"를 사용하여 가로로 변경 가능하다.
-//부모 컨테이너에 display:flex를 할 필요는 없지만 flex 할당은 해야한다.
-// 부모 컨테이너 하위의 있는 아이템들의 flex는 비율을 나타낸다.
 export default function App() {
   return (
-    <View style={{flex:1, flexDirection:"row"}}>
-      <View style={{flex:1, backgroundColor: "tomato"  }}></View>
-      <View style={{flex:3, backgroundColor: "teal"  }}></View>
-      <View style={{flex:1, backgroundColor: "orange"  }}></View>
+    <View style={styles.container}>
+      <View style={styles.city}>
+        <Text style={styles.cityName}>Seoul</Text>
+      </View>
+      <View style={styles.weather}>
+        <View style={styles.day}>
+          <Text style={styles.temp}>27</Text>
+          <Text style={styles.description}>Sunny</Text>
+        </View>
+      </View>
     </View>
   );
 }
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "orange",
+  },
+  city: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems:"center"
+  },
+  cityName:{
+    fontSize:28,
+    fontWeight: "600"
+  },
+  weather: {
+    flex: 3,
+  },
+  day : {
+    flex: 1,
+    alignItems: "center",
+    backgroundColor:"teal",
+  },
+  temp: {
+    marginTop: 50,
+    fontSize: 150
+  },
+  description:{
+    marginTop: -30,
+    fontSize: 30,
+  },
+});
+
+// Expo 재실행 : r 클릭 (= Refreshed)
+// Expo 어플리케이션 추가 도구 : m 클릭 혹은 디바이스 흔들기
 /*
-  기존 HTML의 Flex을 사용하기 위해서 부모 컨테이너에 display:flex; 를 작성해야
-  아이템들이 적용되었지만 RN의 경우 View Components 그 자체가 flex이다.
-  즉, 부모 컨테이너에 display: flex를 적용할 필요가 없다.  
-  또한, RN에서 style 요소들 중 width,height(높이, 너비)를 사용하여 어플을 제작하지 않는다.  
-  그 이유는 각 디바이스에 따라 화면의 크기가 매우 다양하기 때문에 반응형(비율)으로 제작해야한다.
+  휴대전화 위치 파악 Package -> Expo Location Package
+  
+  --
+  목표
+  휴대전화가 위치한 지역의 16일간 날씨 예측 정보를 불러온다.
 */
